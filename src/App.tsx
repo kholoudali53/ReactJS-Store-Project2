@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import ProductCard from "./Component/ProductCard";
+import Modal from "./Component/ui/Modal";
+import { productList } from "./data";
+import { Button } from "@headlessui/react";
 
-function App() {
-  const [count, setCount] = useState(0)
 
+const App = () => {
+  
+  const [isOpen, setIsOpen] = useState(false)
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  // ** Render
+  const renderProductList = productList.map(product => <ProductCard  key={product.id} product={product} />) // map return array of jsx
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    
+    <main className="container">
+      <Button className="bg-indigo-700 w-full hover:bg-indigo-400" onClick={openModal}>Add</Button>
+      <div className="m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 p-2 rounded-md">
+        {renderProductList}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <Modal isOpen = {isOpen} closedModel={closeModal} title="ADD A NEW PRODUCT" >
+        <div className="flex items-center space-x-3">
+          <Button className="bg-indigo-600 w-full hover:bg-indigo-800">Submit</Button>
+        <Button className="bg-gray-600 w-full hover:bg-gray-400">Cancel</Button>
+        </div>
+      </Modal>
+    </main>
+  );
+};
 
-export default App
+export default App;
