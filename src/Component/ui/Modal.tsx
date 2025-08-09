@@ -8,7 +8,7 @@ interface IProps {
   title?: string;
   children: ReactNode;
 }
-
+// inset : r=0, l=0, t=0, b=0
 export default function Modal({isOpen, closedModel, title, children}: IProps) {
 
 
@@ -19,9 +19,9 @@ export default function Modal({isOpen, closedModel, title, children}: IProps) {
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4">
 
-            <DialogPanel transition className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0">
+            <DialogPanel transition className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0">
             
-              {title && <DialogTitle as="h3" className="text-base/7 font-medium text-white">
+              {title && <DialogTitle as="h3" className="text-base/7 font-medium text-black">
                 {title}
               </DialogTitle>}
               
